@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SongContest.Web.DataTransferObjects.ParticipantOverviewDto>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="m-1">
+    <a asp-action="GetResultOverview">Gesamtergebnis anzeigen</a>
+</div>
+
+<div class="m-2">
+    <a asp-controller="Participant" asp-action="Create" class="btn btn-primary text-white">Neuen Teilnehmer anlegen</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Teilnehmerland</th>
+        <th>Song</th>
+        <th>Sänger/Sängerin</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Country</td>
+            <td>@item.Song</td>
+            <td>@item.Name</td>
+            <td>
+                <a asp-controller="ParticipantComposer" asp-action="Create" asp-route-id="@item.Id">Komponisten bearbeiten</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

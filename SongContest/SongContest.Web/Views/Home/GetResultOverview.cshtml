@@ -1,0 +1,28 @@
+﻿@model ParticipantResultsViewModel
+@{
+    ViewData["Title"] = "Teilnehmer Ergebnisse";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <tr>
+        <th>Land</th>
+        <th>Gesamtpunkte</th>
+        @foreach(var county in Model.CountryNames)
+        {
+            <th>@county</th>
+        }
+    </tr>
+    @foreach (var participant in Model.Participants)
+    {
+        <tr>
+            <td>@participant.Country</td>
+            <td>@participant.Points</td>
+            @foreach (var result in participant.Results)
+            {
+                <td>@result.Points</td>
+            }
+        </tr>
+    }
+</table>

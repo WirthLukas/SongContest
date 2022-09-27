@@ -1,0 +1,103 @@
+﻿<mah:MetroWindow
+        x:Class="SongContest.Mvvm.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SongContest.Mvvm"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        WindowStyle="ThreeDBorderWindow"
+        BorderThickness="2"
+        BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterScreen"
+        Title="SongContest - Länder"
+        Height="550" Width="500">
+    <!--
+    Further possible Properties:
+    GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+    -->
+
+    <mah:MetroWindow.LeftWindowCommands>
+        <mah:WindowCommands>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0">
+                <iconPacks:Modern Kind="Music" Width="20" Height="20" />
+            </StackPanel>
+        </mah:WindowCommands>
+    </mah:MetroWindow.LeftWindowCommands>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Margin="5" Grid.Row="0" FontSize="25" FontWeight="Bold">Länderübersicht</TextBlock>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,5">
+                Land:
+            </TextBlock>
+            <TextBox Grid.Column="1" Text="{Binding CountryNameFilter, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,5">
+                Nur Länder mit Songs:
+            </TextBlock>
+            <CheckBox Grid.Column="3" IsChecked="{Binding OnlyCountriesWithSongs}" />
+        </Grid>
+
+        <DataGrid x:Name="DataGridCountry" Grid.Row="2" Margin="5"
+                  BorderThickness="1" IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding SelectedCountry}"
+                  ItemsSource="{Binding Countries}"
+                  FontSize="12">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Country}" Header="Land" Width="100">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="10,0,5,0" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=GivenVotes}" Header="Länder bewertet (>0)">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="10,0,5,0" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Points}" Header="Erhaltene Punkte">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="10,0,5,0" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="3">
+            <Button Margin="10,5" Command="{Binding CommandEditVotes}">
+                Bewertung abgeben/bearbeiten
+            </Button>
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>
