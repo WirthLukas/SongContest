@@ -1,5 +1,5 @@
 # SongContest Management Tool
-It was an preperation exercise for the final exam. For more Information look at [angabe]("./Angabe.pdf")
+It was an preperation exercise for the final exam. For more Information look at [angabe](/Angabe.pdf)
 
 ## Technologies Used
 
